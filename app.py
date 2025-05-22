@@ -57,3 +57,40 @@ def execute_query():
 
 if __name__ == '__main__':
     app.run(debug=True)
+# @app.route('/execute', methods=['POST'])
+# def execute_query():
+#     data = request.get_json()
+#     raw_queries = data.get("query")
+    
+#     try:
+#         connection = pymysql.connect(**db_config)
+#         cursor = connection.cursor()
+
+#         queries = [q.strip() for q in raw_queries.split(';') if q.strip()]
+#         results = []
+#         for idx, query in enumerate(queries):
+#             try:
+#                 cursor.execute(query)
+#                 if query.lower().startswith("select"):
+#                     columns = [desc[0] for desc in cursor.description]
+#                     data = cursor.fetchall()
+#                     results.append({
+#                         "query": query,
+#                         "columns": columns,
+#                         "data": data,
+#                         "error": None,
+#                     })
+#                 else:
+#                     connection.commit()
+#                     results.append({"query": query, "message": "Executed", "error": None})
+#             except Exception as e:
+#                 results.append({"query": query, "error": str(e)})
+
+#         return jsonify({"success": True, "results": results})
+#     except Exception as e:
+#         return jsonify({"success": False, "error": str(e)})
+#     finally:
+#         cursor.close()
+#         connection.close()
+# if __name__ == '__main__':
+#     app.run(debug=True)
